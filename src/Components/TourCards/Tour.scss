@@ -1,0 +1,165 @@
+.tour{
+    &-title{
+        text-align: center;
+        font-size: 50px;
+        color: rgb(21, 68, 95);
+        margin: 30px;
+    }
+
+    &-wrapper{
+        justify-content: center;
+    }
+    &-item{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        justify-content: space-between;
+        padding: 15px 10px;
+        border: 2px solid rgb(56, 131, 201);
+        box-shadow: 0px 0px 15px 5px rgba(179,208,224,1);
+        cursor: pointer;
+
+        &-img{
+            max-width: 300px;
+            box-shadow: 0px 0px 15px 5px rgba(179,208,224,1);
+        }
+
+        &-city-img{
+            margin: 25px 0;
+        }
+
+        &-back{
+            display: none;
+            padding: 30px 10px;
+            background: rgb(231, 240, 240); 
+            box-shadow: 0px 0px 10px 3px rgba(86,114,130,1);
+
+            &-like{
+                max-width: 100%;
+                display: flex;
+                margin-bottom: 20px;
+                padding-right:25px;
+            }
+        }
+
+        &-departure{
+            font-weight: 300; 
+            font-size: 20px;
+        }
+    }
+
+}
+.tour-card-wrapper {
+    text-align: center;
+    transition: 1.6s;
+    margin-bottom: 20px;
+}
+
+.tour-card-wrapper:hover > .tour-item {
+    display: none;
+}
+
+.tour-card-wrapper:hover > .tour-item-back  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-between;
+}
+
+.tour-item, .tour-item-back {
+    width: 100%;
+    height: 100%;
+} 
+
+.fa-heart {
+    color: rgb(170, 154, 154);
+    width: 45px;
+    margin-left: auto;
+    cursor: pointer;
+}
+.fa-heart:hover{
+    color: rgb(201, 41, 41);
+}
+
+.fa-angle-double-right {
+    width: 45px;
+    color: rgb(36, 61, 53);
+    cursor: pointer;
+}
+.fa-angle-double-right:hover{
+    color: rgb(132, 185, 192);
+}
+
+// tour info
+
+.swiper-container{
+    height: 350px;
+}
+
+.tour-info {
+    text-align: center;
+
+    &-text{
+        font-size: 20px;
+        margin: 15px 0;
+    }
+    &-message{
+        font-size: 18px;
+        font-weight: 300;
+        font-style: italic;
+        color: rgb(33, 78, 62);
+    }
+    &-description{
+        font-size: 24px;
+    }
+
+    &-transport{
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+
+        label{
+            width: 250px;
+            font-size: 26px;
+        }
+        input{
+            margin-left: 10px;
+        }
+    }
+
+    &-cost{
+        font-size: 30px;
+        color:rgb(26, 33, 54);
+    }
+    &-slider-item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: fit-content;
+    }
+    &-delete{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 50px;
+
+        &-text{
+            color: rgb(112, 40, 40);
+            font-size: 20px;
+            font-weight: 600;
+            margin-right: 35px;
+            margin-bottom: 0;
+        }
+
+        svg{
+            width: 50px;
+        }
+        svg:hover{
+            color: rgb(97, 20, 20);
+        }
+    }
+}
+
+.active-heart{
+    color: rgb(201, 41, 41);
+}

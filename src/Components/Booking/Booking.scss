@@ -1,0 +1,18 @@
+.booking{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    &-form{
+        background-image: url('../../img/leaves.png');
+        width: 700px;
+        margin: 30px;
+        padding: 20px;
+        border: 1px solid rgb(228, 215, 215);
+
+        &-btn{
+            text-align: center;
+            margin: 20px 0;
+        }
+    }
+}

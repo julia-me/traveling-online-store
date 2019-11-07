@@ -1,0 +1,30 @@
+.favourite{
+    text-align: center;
+
+    &-content{
+        justify-content: space-around;
+        margin: 40px 0;
+    }
+
+    &-item{
+    width: 100%;
+    height: 100%;
+    padding: 15px 10px;
+    border: 2px solid #3883c9;
+    box-shadow: 0px 0px 15px 5px #b3d0e0;
+
+        &-delete{
+            max-width: 100%;
+            display: flex;
+            margin-bottom: 20px;
+            padding-right: 25px;
+
+            .fa-trash {
+                width: 25px;
+                margin-left: auto;
+                cursor: pointer;
+                color: rgb(172, 170, 170);
+            }
+        }
+    }
+}
