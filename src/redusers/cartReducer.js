@@ -17,8 +17,13 @@ export default (state=cartInitialState, action) => {
         const deletedState = [...state].filter(item => item.id !== removeTour);
         localStorage.setItem('cart', JSON.stringify(deletedState));
         return deletedState
+    
+    case 'CLEAR_CART':
+        // const { removeTour } = action;
+        const clearCart = [];
+        localStorage.setItem('cart', JSON.stringify(clearCart));
+        return clearCart
 
     default: return state
   }
 }
-

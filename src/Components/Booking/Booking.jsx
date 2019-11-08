@@ -1,7 +1,7 @@
 import React , {useState} from 'react';
 import { connect } from 'react-redux'; 
-import {Link} from 'react-router-dom';
-import {removeFromCart} from '../../actions/actions'
+import {useHistory} from 'react-router-dom';
+import {addOrder} from '../../actions/actions'
 import './Booking.scss'
 
 const mapStateToProps = store => {
@@ -13,19 +13,33 @@ const mapStateToProps = store => {
 
 const matchDispatchToProps = dispatch => {
   return {
-    removeFromCart: (removeTour) => {
-      dispatch(removeFromCart(removeTour));
+    addOrder: (order) => {
+      dispatch(addOrder(order));
     }
   }
 };
 
-function Booking({loginUser, cartTours}) {
+function Booking({loginUser, cartTours, addOrder}) {
 
     const [name, setName]= useState(loginUser.length ? loginUser[0].name : '');
     const [surname, setSurname]= useState(loginUser.length ? loginUser[0].surname : '');
     const [email, setEmail]= useState(loginUser.length ? loginUser[0].email : '');
     const [city, setCity]= useState(loginUser.length ? loginUser[0].city : '');
     const [tel, setTel]= useState(loginUser.length ? loginUser[0].telefone : +380);
+    let telNumberString = tel.toString()
+    let validNumber = telNumberString.length === 12 ? true : false;
+    let history = useHistory()
+
+
+    const finishBookingHendler =()=>{
+      if(name && surname && email && city && validNumber){
+        let userInfo = loginUser.length ? loginUser : [{name:name, surname: surname, email: email, city: city, tel: tel, }];
+        let order = [[...userInfo],[...cartTours], {date: new Date().toLocaleString()}]
+        addOrder(order)
+        localStorage.setItem('lastOrder', JSON.stringify(order))
+        history.push('/finishedBooking')
+      }
+    }
 
     return (
       <div className="booking container">
@@ -51,9 +65,10 @@ function Booking({loginUser, cartTours}) {
               <div className='form-group'>
                   <label htmlFor="tel"> Phone number </label>
                   <input onChange={(e)=> setTel(e.target.value)} type="number" id="tel" className='form-control' value={tel}  placeholder='Phone number' />
+                  {!validNumber && <small id="emailHelp" className="form-text  error"> Phone number must contain 12 figures </small>}
               </div>
               <div className='booking-form-btn'>
-              <button type="button" className="btn btn-info">finish</button>
+              <button  onClick={finishBookingHendler}  type="button" className="btn btn-info">finish </button>
               </div>
           </div>
       </div>

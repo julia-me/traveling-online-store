@@ -14,7 +14,7 @@ const matchDispatchToProps = dispatch => {
 
 const mapStateToProps = store => {
     return {
-      favArr: store.favourite,
+      favArr: store.users,
       liginedUser: store.loginUser,
     }
 };
@@ -24,14 +24,21 @@ function TourItem({data, addToFavourite, favArr, liginedUser, setLoginMessage}) 
     const [price, setPrice]= useState(0);
     const [inFav, setInFav]=useState('svg-inline--fa fa-heart fa-w-16')
 
+    const heartDecoration =()=>{
+        if(liginedUser.length && !liginedUser[0].isAdmin){
+            const fav = favArr.find( el=> el[0].id === liginedUser[0].id)
+            fav[1].find( tour=> {
+                if(tour.id === data.id){
+                    setInFav('svg-inline--fa fa-heart fa-w-16 active-heart')
+                }
+            })
+        }
+    }
+
     useEffect(()=> {
         MinPrice()
-        favArr.find( el =>{
-            if(el.id === data.id){
-                setInFav('svg-inline--fa fa-heart fa-w-16 active-heart')
-            }
-        }); 
-    },[favArr])
+        heartDecoration()
+    },[])
 
     // const ViewTourHendler =() => {
     //     localStorage.setItem('Tour', JSON.stringify(data))
@@ -44,6 +51,7 @@ function TourItem({data, addToFavourite, favArr, liginedUser, setLoginMessage}) 
         else{
             setLoginMessage(true)
         }
+        heartDecoration()
     }
 
     const MinPrice =() =>{
@@ -51,6 +59,8 @@ function TourItem({data, addToFavourite, favArr, liginedUser, setLoginMessage}) 
         setPrice(Math.min(...priceArr))
     }
 
+    let endDay = new Date(data.endDay)
+    let startDay = new Date(data.startDay)
 
     return (
       <div className="col-6 col-md-4 tour-card-wrapper some">
@@ -60,7 +70,7 @@ function TourItem({data, addToFavourite, favArr, liginedUser, setLoginMessage}) 
             <div className='tour-item-city-img'>
                 <img src={data.mainImg} alt="" className='tour-item-img'/>
             </div>
-            <p> {(data.endDay - data.startDay)/(24*60*60*1000)} days vacation</p>
+            <p> {(endDay - startDay)/(24*60*60*1000)} days vacation</p>
           </div>
           <div className='tour-item-back tour-card'>
             <div className="tour-item-back-like">
@@ -68,15 +78,13 @@ function TourItem({data, addToFavourite, favArr, liginedUser, setLoginMessage}) 
             </div>
             <h3>  <span className="tour-item-departure"> Departure from </span> {data.departureCity} </h3>
             <h3>  <span className="tour-item-departure">  Arrival city  </span>  {data.arrivalCity}  ({data.arrivalCountry} ) </h3>
-            <p> from {data.startDay.toLocaleDateString()}  to  {data.endDay.toLocaleDateString()} ({(data.endDay - data.startDay)/(24*60*60*1000)} days) </p>
+            <p> from {startDay.toLocaleDateString()}  to  {endDay.toLocaleDateString()} ({(data.endDay - data.startDay)/(24*60*60*1000)} days) </p>
             <p> tour for {data.numberOfTrevellers}  person</p>
             <p> Cost from: {price} $.</p>
             <div className="tour-item-back-more">
                 <Link to={{pathname: `/${data.id}`}}>
                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-double-right" className="svg-inline--fa fa-angle-double-right fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34zm192-34l-136-136c-9.4-9.4-24.6-9.4-33.9 0l-22.6 22.6c-9.4 9.4-9.4 24.6 0 33.9l96.4 96.4-96.4 96.4c-9.4 9.4-9.4 24.6 0 33.9l22.6 22.6c9.4 9.4 24.6 9.4 33.9 0l136-136c9.4-9.2 9.4-24.4 0-33.8z"></path></svg>
                 </Link>
-                {/* <svg className="tour-item-back-more-img" height="512pt" viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg"><path d="m437.019531 74.980469c-48.351562-48.351563-112.640625-74.980469-181.019531-74.980469s-132.667969 26.628906-181.019531 74.980469c-48.351563 48.351562-74.980469 112.640625-74.980469 181.019531s26.628906 132.667969 74.980469 181.019531c48.351562 48.351563 112.640625 74.980469 181.019531 74.980469s132.667969-26.628906 181.019531-74.980469c48.351563-48.351562 74.980469-112.640625 74.980469-181.019531s-26.628906-132.667969-74.980469-181.019531zm-181.019531 397.019531c-119.101562 0-216-96.898438-216-216s96.898438-216 216-216 216 96.898438 216 216-96.898438 216-216 216zm20-236.019531h90v40h-90v90h-40v-90h-90v-40h90v-90h40zm0 0"/></svg> */}
-                {/* <img className="tour-item-back-more-img" src={more} alt="more"/> */}
             </div>
           </div>
       </div>

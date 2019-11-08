@@ -27,7 +27,7 @@ function TourCards({liginedUser}) {
     return (
       <div className="main container">
         <h1 className='tour-title'> Lets choose the best tour !</h1>
-        {loginMessage  ? <h3 className='tour-title'> to add tours in favourite you nedd login </h3> : null}
+        {loginMessage  ? <h3 className='error'> to add tours in favourite you nedd login </h3> : null}
         <div className='row tour-wrapper'> 
         {tours.map(tour =>{
           return <TourItem setLoginMessage={setLoginMessage} data={tour} key={tour.id+tour.arrivalCity}/>

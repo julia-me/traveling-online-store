@@ -8,25 +8,38 @@ import './Favourite.scss'
 
 const matchDispatchToProps = dispatch => {
     return {
-        removeFromFavourite: (daeletedTour) => {
-        dispatch(removeFromFavourite(daeletedTour));
+        removeFromFavourite: (deleteTour) => {
+        dispatch(removeFromFavourite(deleteTour));
       }
     }
 };
 
 const mapStateToProps = store => {
     return {
-      favArr: store.favourite,
+        allUsers: store.users,
+        loginUser: store.loginUser,
+    //   favArr: store.favourite,
     }
 };
 
-function Favourite({favArr, removeFromFavourite}) {
 
+function Favourite({allUsers, removeFromFavourite, loginUser}) {
+    // const allUsers = JSON.parse(localStorage.getItem('newUsers')) || [];
+    // console.log('allUsers', allUsers)
+    // console.log('loginUser', loginUser)
+    let favArr =[];
+    allUsers.map( el=>{
+        if(el[0].id === loginUser[0].id){
+            favArr = [...el[1]]
+        }
+    })
+    console.log('favArr', favArr)
     return (
       <div className=" favourite container">
        {favArr.length ? <h1> Your favourite tours </h1> : <h1> Your dont have favourite tours yet </h1>}
         <div className='row favourite-content'>
         {favArr.map(tour => {
+            console.log('tour', tour)
             let start = tour.startDay.slice(0,10)
             let end = tour.endDay.slice(0,10)       
             return(

@@ -20,18 +20,27 @@ const mapStateToProps = store => {
 };
 
 function Login({users, loginUser}) {
-    let arrOfUsers = [...users, ...dataUsers];
+    // let arrOfUsers = [...users, ...dataUsers];
     // console.log('arrOfUsers', arrOfUsers);
     const [login, setLogin]=useState('');
     const [password, setPassword]=useState('');
     const [message, setMessage]=useState('');
     let history = useHistory();
 
+    let allUsers =[...dataUsers, ...users]
+    // if(users.length){
+    //   allUsers = JSON.parse(localStorage.getItem('allUsers'))
+    // }
+    // else{
+    //   allUsers = [...dataUsers]
+    // }
+    console.log('allUsers', allUsers)
+
     const LoginHendler =()=> {
         if(password && login){
-            let matchUser = arrOfUsers.find(user => user.login===login);
-            if(matchUser && matchUser.password === password){
-                loginUser(matchUser)
+            let matchUser = allUsers.find(user => user[0].login === login);
+            if(matchUser && matchUser[0].password === password){
+                loginUser(matchUser[0])
                 history.push('/')
                 setPassword('')
                 setLogin('')

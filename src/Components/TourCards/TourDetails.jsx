@@ -28,7 +28,7 @@ function TourDetails({addToCart, cartTours, removeFromCart}) {
   let id = window.location.pathname.slice(1)
   const data = tours.find(el => el.id === +id);
   const [transport, setTransport]= useState([]);
-  const history =useHistory()
+  const history = useHistory()
   const match = cartTours.find( tour => tour.id === +id)
 
     const ChooseTransportHendler =(e) =>{
@@ -38,7 +38,6 @@ function TourDetails({addToCart, cartTours, removeFromCart}) {
     }
 
     const AddToCartHendler=()=>{
-      console.log(transport)
       if(transport.length){
         let bookedTour = {...data}
         bookedTour.transportOption = transport
@@ -63,14 +62,16 @@ function TourDetails({addToCart, cartTours, removeFromCart}) {
         prevEl: '.swiper-button-prev'
       }
     }
+    let endDay = new Date(data.endDay)
+    let startDay = new Date(data.startDay)
 
     return (
       <div className="tour-info container">
           <h1> {data.arrivalCountry} </h1>
           <h2> {data.arrivalCity}  </h2>
-          <p className='tour-info-text'> Departure at {data.startDay.toLocaleDateString()} from: {data.departureCity}</p>
-          <p className='tour-info-text'> Arrival back at {data.endDay.toLocaleDateString()}</p>
-          <p className='tour-info-text'>  {(data.endDay - data.startDay)/(24*60*60*1000)}  days tour </p> 
+          <p className='tour-info-text'> Departure at {startDay.toLocaleDateString()} from: {data.departureCity}</p>
+          <p className='tour-info-text'> Arrival back at {endDay.toLocaleDateString()}</p>
+          <p className='tour-info-text'>  {(endDay - startDay)/(24*60*60*1000)}  days tour </p> 
           {/* <p> Arrival  to {data.departureCity} </p> */}
           <Swiper {...params} className="swiper tour-info-slider"> 
           {data && data.arrOfImg.map((img, index) =>{

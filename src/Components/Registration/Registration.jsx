@@ -8,8 +8,8 @@ import dataUsers from '../../data/users'
 
 const matchDispatchToProps = dispatch => {
   return {
-    addUser: (name, surname, email, login, password, city, telefone) => {
-      dispatch(addUser(name, surname, email, login, password, city, telefone));
+    addUser: (newUser) => {
+      dispatch(addUser(newUser));
     },
     loginUser: (user) => {
       dispatch(loginUser(user));
@@ -25,7 +25,7 @@ const mapStateToProps = store => {
 
 function Registration(props) {
   const {users} = props
-  // console.log()
+
   let history =useHistory()
   let arrOfUsers = [...users, ...dataUsers];
   const [message, setMessage]=useState('');
@@ -39,13 +39,15 @@ function Registration(props) {
   const [city, setCity] = useState('');
   const [telefone, setTelefone] = useState(+380);
 
+  let telNumberString = telefone.toString()
+  let validNumber = telNumberString.length === 12 ? true : false;
 
 
   const RegistrationHendler =()=>{
-    let invalidLogin = arrOfUsers.find(el=> el.login === login)
-    if(!invalidLogin && name && surname && email && login && password && city && telefone){
-      props.addUser(name, surname, email, login, password, city, telefone);
-      props.loginUser({name, surname, email, login, password, city, telefone})
+    let invalidLogin = arrOfUsers.find(el=> el[0].login === login)
+    if(!invalidLogin && validNumber && name && surname && email && login && password && city && telefone){
+      props.addUser({name, surname, email, login, password, city, telefone, id: users.length+login});
+      props.loginUser({name, surname, email, login, password, city, telefone, id: users.length+login})
       setName('');
       setSurname('');
       setEmail('');
@@ -104,6 +106,7 @@ function Registration(props) {
               <div className="registration-form-item">
                   <label htmlFor=""> Phone number *
                     <input type="number" placeholder='enter phone number' value={telefone} onChange={(e)=> setTelefone(e.target.value)} />
+                    {!validNumber && <small id="emailHelp" className="error"> Phone number must contain 11 figures </small>}
                   </label>
               </div>
               <p> <span> * - </span> required fields </p>
