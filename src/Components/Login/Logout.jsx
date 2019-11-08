@@ -2,21 +2,25 @@ import React from 'react';
 import { connect } from 'react-redux'; 
 import {Link} from 'react-router-dom';
 import './Login.scss';
-import { logoutUser } from '../../actions/actions'
+import { logoutUser, clearCart } from '../../actions/actions'
 
 
 const matchDispatchToProps = dispatch => {
   return {
     logoutUser: (arr) => {
       dispatch(logoutUser(arr));
+    },
+    clearCart: () => {
+      dispatch(clearCart());
     }
   }
 };
 
-function Logout({logoutUser}) {
+function Logout({logoutUser, clearCart}) {
 
   const LogoutHendler =()=> {
     logoutUser([])
+    clearCart()
     // localStorage.setItem('loginUser', JSON.stringify([]))
   }
 

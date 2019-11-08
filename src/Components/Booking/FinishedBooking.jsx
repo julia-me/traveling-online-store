@@ -21,7 +21,7 @@ function FinishedBooking({clearCart}) {
     let userInfo=[...orders[0]];
     let tourInfo = [...orders[1]];
     let userName = userInfo[0].name[0].toUpperCase() + userInfo[0].name.slice(1)
-    console.log(tourInfo)
+    // console.log(tourInfo)
 
     let totalCost =0;
     tourInfo.map(el=> {
@@ -39,7 +39,7 @@ function FinishedBooking({clearCart}) {
           <h3> You ordered {tourInfo.length} tour ps. </h3>
           {tourInfo.map( tour =>{
               return(
-                  <p className='booking-text'>  From {tour.departureCity} ({tour.startDay}) to {tour.arrivalCity} ({tour.endDay}). You chose to travel by {tour.transportOption[0].transport}. </p>
+                  <p className='booking-text' key={tour.departureCity+userInfo[0].login}>  From {tour.departureCity} ({tour.startDay}) to {tour.arrivalCity} ({tour.endDay}). You chose to travel by {tour.transportOption[0].transport}. </p>
               )
           })}
           <div className='booking-total-info'>

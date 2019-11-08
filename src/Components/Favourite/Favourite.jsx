@@ -33,13 +33,11 @@ function Favourite({allUsers, removeFromFavourite, loginUser}) {
             favArr = [...el[1]]
         }
     })
-    console.log('favArr', favArr)
     return (
       <div className=" favourite container">
        {favArr.length ? <h1> Your favourite tours </h1> : <h1> Your dont have favourite tours yet </h1>}
         <div className='row favourite-content'>
         {favArr.map(tour => {
-            console.log('tour', tour)
             let start = tour.startDay.slice(0,10)
             let end = tour.endDay.slice(0,10)       
             return(

@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import {Link, useHistory} from 'react-router-dom';
 import Swiper from 'react-id-swiper';
 import {addToCart, removeFromCart} from '../../actions/actions'
-import tours from '../../data/tours'
+import toursData from '../../data/tours'
 import 'react-id-swiper/lib/styles/scss/swiper.scss';
 import './Tour.scss'
 
 const mapStateToProps = store => {
   return {
     cartTours: store.cartTours,
+    newTours: store.newTours,
   }
 };
 
@@ -24,7 +25,8 @@ const matchDispatchToProps = dispatch => {
   }
 };
 
-function TourDetails({addToCart, cartTours, removeFromCart}) {
+function TourDetails({addToCart, cartTours, removeFromCart, newTours}) {
+  let tours = [...toursData, ...newTours]
   let id = window.location.pathname.slice(1)
   const data = tours.find(el => el.id === +id);
   const [transport, setTransport]= useState([]);

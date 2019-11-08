@@ -43,13 +43,15 @@ function Header({user}) {
           </ul>
           <div className="header-login">
             {!user.length ? <Link className="header-login-item" to="/login"> LogIn </Link> : <Link className="header-login-item" to="/logout"> log out </Link>  }
-            {user.length ? <p> Welcome, {user[0].name}  </p> : null}
+          </div>
+          <div className="header-login">
+            {user.length && !user[0].isAdmin ? <p className='header-login-name'> Welcome, {user[0].name}  </p> : null}
           </div>
           <div className="header-shopping-cart">
             <Link to="/cart"> 
               <img src={cart} alt=""/>
             </Link> 
-          </div>
+          </div> 
       </div>
       </>
     );

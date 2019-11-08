@@ -2,20 +2,21 @@ import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux'; 
 import {Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css';
-import tours from '../../data/tours'
+import toursData from '../../data/tours'
 import TourItem from './TourItem'
 import './Tour.scss'
 
 const mapStateToProps = store => {
   return {
     liginedUser: store.loginUser,
+    newTours: store.newTours,
   }
 };
 
 
-function TourCards({liginedUser}) {
+function TourCards({liginedUser, newTours}) {
   const [loginMessage, setLoginMessage] = useState(false)
-
+  let tours = [...toursData, ...newTours]
   console.log(tours)
 
   useEffect(()=>{

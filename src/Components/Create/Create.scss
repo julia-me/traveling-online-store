@@ -1,0 +1,14 @@
+.create{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    &-title{
+        margin: 20px;
+        text-align: center;
+    }
+
+    .text-muted{
+        color: rgb(155, 140, 10)!important;
+    }
+}

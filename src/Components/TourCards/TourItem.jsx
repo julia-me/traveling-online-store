@@ -78,7 +78,7 @@ function TourItem({data, addToFavourite, favArr, liginedUser, setLoginMessage}) 
             </div>
             <h3>  <span className="tour-item-departure"> Departure from </span> {data.departureCity} </h3>
             <h3>  <span className="tour-item-departure">  Arrival city  </span>  {data.arrivalCity}  ({data.arrivalCountry} ) </h3>
-            <p> from {startDay.toLocaleDateString()}  to  {endDay.toLocaleDateString()} ({(data.endDay - data.startDay)/(24*60*60*1000)} days) </p>
+            <p> from {startDay.toLocaleDateString()}  to  {endDay.toLocaleDateString()} ({(endDay - startDay)/(24*60*60*1000)} days) </p>
             <p> tour for {data.numberOfTrevellers}  person</p>
             <p> Cost from: {price} $.</p>
             <div className="tour-item-back-more">

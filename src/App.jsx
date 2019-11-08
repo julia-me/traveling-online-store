@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { connect } from 'react-redux'; 
 import { Router, Route, Switch } from "react-router";
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
@@ -12,16 +13,25 @@ import Cart from './Components/Cart/Cart';
 import About from './Components/About/About';
 import Booking from './Components/Booking/Booking';
 import FinishedBooking from './Components/Booking/FinishedBooking'
-import tours from './data/tours';
+import toursData from './data/tours';
 import Orders from './Components/Orders/Orders'
 import Create from './Components/Create/Create'
 
-function App() {
+const mapStateToProps = store => {
+  return {
+    newTours: store.newTours,
+  }
+};
+
+function App({newTours}) {
   const [data, setData] = useState([])
+  let tours = [...toursData, ...newTours]
 
   const TourPage = ({ match }) => {
+    console.log(match)
     tours.forEach(tour => { 
       if(tour.id === +match.params.tour){
+        console.log(tour)
         return setData(tour)
       }
     })
@@ -46,13 +56,14 @@ function App() {
         <Route exact path='/orders'component={Orders} />
         <Route exact path='/create'component={Create} />
         <Route exact path='/cart' component={Cart} />
-        <Route  path='*' component={()=> <h1> 404 </h1>} />
 
         <Route path="/:tour" component={TourPage}/>
+        <Route  path='*' component={()=> <h1> 404 </h1>} />
       </Switch >
       {/* <Footer/> */}
       </React.Fragment>
   );
 }
 
-export default App;
+// export default App;
+export default connect(mapStateToProps, null)(App);

@@ -45,3 +45,7 @@ export const addOrder=(order) => {
 export const clearCart=() => {
     return {type: 'CLEAR_CART'};
 };
+
+export const addNewTour=(newTour) => {
+    return {type: 'ADD_TOUR', newTour};
+};
