@@ -1,11 +1,12 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
-
+import './Footer.scss';
 
 function Footer() {
     return (
       <div className="footer">
-        <h1> footer</h1>
+        <div className='container'>
+            <p> &copy; Julia Predantseva</p>
+        </div>
       </div>
     );
   }
