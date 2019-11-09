@@ -27,7 +27,7 @@ const matchDispatchToProps = dispatch => {
 
 function TourDetails({addToCart, cartTours, removeFromCart, newTours}) {
   let tours = [...toursData, ...newTours]
-  let id = window.location.pathname.slice(1)
+  let id = window.location.pathname.slice(6)
   const data = tours.find(el => el.id === +id);
   const [transport, setTransport]= useState([]);
   const history = useHistory()

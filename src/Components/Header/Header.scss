@@ -50,17 +50,28 @@
 
     &-login{
         &-item{
-            font-size: 30px;
-            padding: 10px;
-            border: 1px solid grey;
+            font-size: 25px;
+            padding: 7px;
+            border: 1px solid rgb(58, 192, 46);
             border-radius: 10px;
             color: rgb(65, 64, 64);
+            background: rgba(143, 207, 172, 0.2);
         }
         &-name{
             font-size: 18px;
             text-align: center;
             margin-top: 10px;
             color: rgb(16, 54, 88);
+        }
+    }
+    &-logout{
+        &-item{
+            font-size: 25px;
+            padding: 7px;
+            border: 1px solid rgb(133, 21, 21);
+            border-radius: 10px;
+            color: rgb(65, 64, 64);
+            background: rgba(224, 144, 141, 0.2);
         }
     }
 }

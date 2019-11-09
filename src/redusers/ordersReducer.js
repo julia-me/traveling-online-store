@@ -9,6 +9,17 @@ export default (state=ordersInitialState, action) => {
     localStorage.setItem('order', JSON.stringify(newState));
     return newState;
 
+    case 'CHANGE_ORDER_STATUS':
+        const { oderStatus } = action;
+        state.map( el => {
+          if(el[3].id === oderStatus.id){
+            el[3] = oderStatus
+          }
+        })
+        // console.log('changedState', state);
+        localStorage.setItem('order', JSON.stringify(state));
+        return state;
+
     default: return state
     }
 }

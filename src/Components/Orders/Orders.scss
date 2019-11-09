@@ -12,9 +12,23 @@
         margin-bottom: 30px;
 
         &-date{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
             text-align: left;
             font-weight: bold;
             font-size: 22px;
+
+            div{
+                display: flex;
+                justify-content: flex-end;
+                width: 50%;
+
+                .btn-main{
+                    margin-left: 15px;
+                }
+            }
         }
         &-user{
             text-align: left;
@@ -38,4 +52,16 @@
             }
         }
     }
+}
+
+.rejected{
+    background: rgba(169, 176, 177, 0.3);
+}
+
+.paid{
+    background: rgba(78, 192, 135, 0.3);
+}
+
+.consideration{
+    background: rgba(241, 233, 107, 0.3);
 }

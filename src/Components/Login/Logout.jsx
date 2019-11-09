@@ -26,11 +26,12 @@ function Logout({logoutUser, clearCart}) {
 
     return (
       <div className="main container">
-          <div className="login">
+          <div className="logout">
             <h1> do you really want to logout? </h1> 
-
-            <Link className="header-login-item" to="/"> no! back to main page </Link> 
-            <Link className="header-login-item" to="/" onClick={LogoutHendler}> yes! </Link> 
+            <div className='logout-buttons'> 
+            <Link className="btn btn-success" to="/">  no! back to main page </Link> 
+            <Link className="btn btn-warning" to="/" onClick={LogoutHendler}> yes! I really want </Link> 
+            </div>
 
           </div>
       </div>

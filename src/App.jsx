@@ -16,6 +16,7 @@ import FinishedBooking from './Components/Booking/FinishedBooking'
 import toursData from './data/tours';
 import Orders from './Components/Orders/Orders'
 import Create from './Components/Create/Create'
+import ErrorElement from './Elements/ErrorElement/ErrorElement'
 
 const mapStateToProps = store => {
   return {
@@ -28,10 +29,8 @@ function App({newTours}) {
   let tours = [...toursData, ...newTours]
 
   const TourPage = ({ match }) => {
-    console.log(match)
     tours.forEach(tour => { 
       if(tour.id === +match.params.tour){
-        console.log(tour)
         return setData(tour)
       }
     })
@@ -57,8 +56,8 @@ function App({newTours}) {
         <Route exact path='/create'component={Create} />
         <Route exact path='/cart' component={Cart} />
 
-        <Route path="/:tour" component={TourPage}/>
-        <Route  path='*' component={()=> <h1> 404 </h1>} />
+        <Route path="/tour/:tour" component={TourPage}/>
+        <Route  path='*' component={ErrorElement} />
       </Switch >
       {/* <Footer/> */}
       </React.Fragment>

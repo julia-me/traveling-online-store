@@ -49,3 +49,8 @@ export const clearCart=() => {
 export const addNewTour=(newTour) => {
     return {type: 'ADD_TOUR', newTour};
 };
+
+export const changeOrderStatus=(oderStatus) => {
+    return {type: 'CHANGE_ORDER_STATUS', oderStatus};
+};
+

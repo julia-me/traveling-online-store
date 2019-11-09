@@ -34,7 +34,7 @@ function Booking({loginUser, cartTours, addOrder}) {
     const finishBookingHendler =()=>{
       if(name && surname && email && city && validNumber){
         let userInfo = loginUser.length ? loginUser : [{name:name, surname: surname, email: email, city: city, tel: tel, }];
-        let order = [[...userInfo],[...cartTours], {date: new Date().toLocaleString()}]
+        let order = [[...userInfo],[...cartTours], {date: new Date().toLocaleString()}, {id: `${+new Date()}${userInfo[0].login}`, bookingStatus: 'consideration'}]
         addOrder(order)
         localStorage.setItem('lastOrder', JSON.stringify(order))
         history.push('/finishedBooking')

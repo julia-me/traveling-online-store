@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link, useHistory} from 'react-router-dom'
 import './Registration.scss'
 import { connect } from 'react-redux';
@@ -25,12 +25,11 @@ const mapStateToProps = store => {
 
 function Registration(props) {
   const {users} = props
-
   let history =useHistory()
   let arrOfUsers = [...users, ...dataUsers];
   const [message, setMessage]=useState('');
+  const [messageEmail, setMessageEmail]=useState('');
   const [emptyFields, setEmptyFields]=useState('');
-
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
@@ -38,14 +37,37 @@ function Registration(props) {
   const [password, setPassword] = useState('');
   const [city, setCity] = useState('');
   const [telefone, setTelefone] = useState(+380);
-
   let telNumberString = telefone.toString()
   let validNumber = telNumberString.length === 12 ? true : false;
+  let validEmail = email.includes('.' && '@') ? true : false;
+  let invalidLogin = arrOfUsers.find(el=> el[0].login === login)
+  let invalidEmail = arrOfUsers.find(el=> el[0].email === email)
 
 
-  const RegistrationHendler =()=>{
-    let invalidLogin = arrOfUsers.find(el=> el[0].login === login)
-    if(!invalidLogin && validNumber && name && surname && email && login && password && city && telefone){
+  let someFunc = () =>{
+    if(invalidLogin){
+      setMessage('this login already exist')
+    }
+    if(invalidEmail){
+      setMessageEmail('this email already exist')
+    }
+    if(!invalidLogin){
+      setMessage(false)
+    }
+    if(!invalidEmail){
+      setMessageEmail(false)
+    }
+  }
+
+  useEffect(()=>{
+    someFunc()
+  },[login, email])
+
+
+  const RegistrationHendler =(e)=>{
+    // e.preventDefault()
+    if(!invalidLogin && !invalidEmail && validNumber && validEmail && name && surname && login && password && city && telefone){
+      console.log({name, surname, email, login, password, city, telefone, id: users.length+login})
       props.addUser({name, surname, email, login, password, city, telefone, id: users.length+login});
       props.loginUser({name, surname, email, login, password, city, telefone, id: users.length+login})
       setName('');
@@ -57,12 +79,11 @@ function Registration(props) {
       setTelefone(+380)
       history.push('/')
     }
-    if(invalidLogin && name && surname && email && login && password && city && telefone){
-      setMessage('this login already exist')
+    if(name && surname && email && login && password && city && telefone){
       setEmptyFields('')
     }
     else{
-      setEmptyFields('you need to fill all form\'s field')
+      setEmptyFields('you need to fill all form\'s fields')
     }
   }
 
@@ -84,8 +105,10 @@ function Registration(props) {
               </div>
               <div className="registration-form-item">
                   <label htmlFor=""> Email *
-                    <input type="email" placeholder='enter email' value={email} onChange={(e)=> setEmail(e.target.value)}/>
+                    <input type="email" placeholder='enter email' value={email} onChange={(e)=> setEmail(e.target.value)} required/>
+                    {!validEmail && <small id="emailHelp" className="error"> example of email: example@mail.com </small>}
                   </label>
+                  <p className="error">  {messageEmail} </p>
               </div>
               <div className="registration-form-item">
                   <label htmlFor=""> Login *
@@ -111,7 +134,7 @@ function Registration(props) {
               </div>
               <p> <span> * - </span> required fields </p>
               <div className="registration-form-send"> 
-               <button className="btn-main " onClick={RegistrationHendler}> rigister user </button> 
+               <button className="btn-main " onClick={(e)=>RegistrationHendler(e)}> rigister user </button> 
               </div>
               <p className="error"> {emptyFields} </p>
             </div>

@@ -20,7 +20,7 @@ function Header({user}) {
         {user.length &&  user[0].isAdmin  ? 
         <div className="header-top">
           <div className='container'>
-            <h1> Hi, {user[0].name}. You logined as Administrator </h1>
+            <h1> Hi, {user[0].name}. You Logged in as Administrator </h1>
           </div>
         </div>
         : null
@@ -42,7 +42,7 @@ function Header({user}) {
               }
           </ul>
           <div className="header-login">
-            {!user.length ? <Link className="header-login-item" to="/login"> LogIn </Link> : <Link className="header-login-item" to="/logout"> log out </Link>  }
+            {!user.length ? <Link className="header-login-item" to="/login"> Log In </Link> : <Link className="header-logout-item" to="/logout"> log Out </Link>  }
           </div>
           <div className="header-login">
             {user.length && !user[0].isAdmin ? <p className='header-login-name'> Welcome, {user[0].name}  </p> : null}

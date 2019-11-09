@@ -48,6 +48,23 @@
 //     font-size: 15px;
 // }
 
+.logout{
+    text-align: center;
+
+    h1{
+        // width: 100%;
+        margin-bottom: 30px;
+        color: rgb(20, 14, 53);
+    }
+
+    &-buttons{
+        display: flex;
+        justify-content: space-around;
+        width: 50%;
+        margin: 0 auto;
+    }
+}
+
 .login-btn{
     width: fit-content;
     margin: 0 auto;
